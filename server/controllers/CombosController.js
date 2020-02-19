@@ -1,12 +1,10 @@
 import express from "express";
-import burgerService from "../services/BurgerService";
-import burgersService from "../services/BurgerService";
+import CombosService from "../services/CombosService";
 
-export default class BurgersController {
+export default class CombosController {
   constructor() {
     this.router = express
       .Router()
-      //NOTE  each route gets registered as a .get, .post, .put, or .delete, the first parameter of each method is a string to be concatinated onto the base url registered with the route in main. The second parameter is the method that will be run when this route is hit.
       .get("", this.getAll)
       .get("/:id", this.getById)
       .post("", this.create)
@@ -16,7 +14,7 @@ export default class BurgersController {
 
   async getAll(req, res, next) {
     try {
-      let data = await burgerService.getAll();
+      let data = await CombosService.getAll();
       return res.send(data);
     } catch (error) {
       next(error);
@@ -25,7 +23,7 @@ export default class BurgersController {
 
   async getById(req, res, next) {
     try {
-      let data = await burgersService.findById(req.params.id);
+      let data = await CombosService.findById(req.params.id);
       res.send(data);
     } catch (error) {
       next(error);
@@ -34,7 +32,7 @@ export default class BurgersController {
 
   async create(req, res, next) {
     try {
-      let data = await burgerService.create(req.body);
+      let data = await CombosService.create(req.body);
       res.status(201).send(data);
     } catch (error) {
       next(error);
@@ -43,7 +41,7 @@ export default class BurgersController {
 
   async edit(req, res, next) {
     try {
-      let data = await burgerService.update(req.params.id, req.body);
+      let data = await CombosService.update(req.params.id, req.body);
       res.send(data);
     } catch (error) {
       next(error);
@@ -51,7 +49,7 @@ export default class BurgersController {
   }
   async delete(req, res, next) {
     try {
-      await burgersService.delete(req.params.id);
+      await CombosService.delete(req.params.id);
       res.send("Delorted");
     } catch (error) {
       next(error);

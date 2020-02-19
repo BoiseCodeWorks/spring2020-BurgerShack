@@ -3,7 +3,10 @@ import express from "express";
 import cors from "cors";
 import bp from "body-parser";
 import DbContext from "./db/dbConfig";
-import BurgersController from "./controllers/BurgerController";
+import BurgersController from "./controllers/BurgersController";
+import SidesController from "./controllers/SidesController";
+import CombosController from "./controllers/CombosController";
+import OrdersController from "./controllers/OrdersController";
 
 const PORT = process.env.PORT || 3000;
 
@@ -36,6 +39,9 @@ server.use(bp.json());
 //NOTE next we want to register all our routes(doorways that can be accessed in our app)
 
 server.use("/api/burgers", new BurgersController().router);
+server.use("/api/sides", new SidesController().router);
+server.use("/api/combos", new CombosController().router);
+server.use("/api/orders", new OrdersController().router);
 
 //NOTE Everything below this line always stays the same
 
